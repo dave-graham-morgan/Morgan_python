@@ -21,4 +21,9 @@ def two_oldest_ages(ages):
     # you may find it helpful to research the `sorted(iter)` function, which
     # can take *any* type of list-like-thing, and returns a new, sorted list
     # from it.
+
+    #I first turn ages into a set to get rid of dupes.
+    #then I turn that set back into a list to preserve order
+    #then I sort that list reversed so the biggest numbers are up front.
+    #add the first two numbers in the sorted list to my tuple and return the whole shebang.
     return (sorted(list(set(ages)), reverse=True)[0], sorted(list(set(ages)), reverse=True)[1])

@@ -13,5 +13,4 @@ def triple_and_filter(nums):
         >>> triple_and_filter([1, 2])
         []
     """
-    #divisible_by_4 = [num for num in nums if num % 4 ==0]
     return [num * 3 for num in [num for num in nums if num % 4 ==0]]
