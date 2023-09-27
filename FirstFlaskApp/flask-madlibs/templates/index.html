@@ -1,0 +1,12 @@
+{%extends 'base.html'%}
+{% block title %}Choose a Story{% endblock %}
+{% block content %}
+<h1>Select a story</h1>
+<form action="/gather_input">
+   <select name="selection" id="the-story">
+      <option value="dragons" name="dragons">There be Dragons</option>
+      <option value="new_automobile">The New Automobile</option>
+   </select>   
+   <input type="submit" value="submit">
+</form>
+{%endblock%}
