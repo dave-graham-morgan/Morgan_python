@@ -1,4 +1,4 @@
-from flask import Flask, request, render_template, redirect, flash
+from flask import Flask, request, render_template, redirect, flash, session
 from flask_debugtoolbar import DebugToolbarExtension
 from surveys import Survey, Question
 
@@ -19,7 +19,7 @@ app.config['SECRET_KEY'] = "201-989-215"
 
 debug = DebugToolbarExtension(app)
 
-responses = []
+#responses = []
 
 @app.route('/')
 def render_homepage():
@@ -27,9 +27,10 @@ def render_homepage():
 
 @app.route('/questions/<value>')
 def render_question_page(value):
+   responses = session['responses']
    #determine if someone is putting a string in the URL
    try:
-       number = int(value)
+       number = int(value) #nope... its a number
    except:
        number = value  #yep... they are
 
@@ -43,21 +44,29 @@ def render_question_page(value):
 
 @app.route('/answer', methods=["POST"])
 def handle_answer():
+    responses = session['responses']
+
     #grab the data we're sending from the question
     question_num = int(request.form['question_num'])
     choice = request.form['choice']
     
     #add the user's choice to responses
     responses.append(choice)
+    session['responses'] = responses
 
     #make sure we're not going to run off the end of the list of questions
     next_question = question_num + 1
     num_questions = len(satisfaction_survey.questions)
 
     if num_questions == next_question:
-        return render_template('thank_you.html', responses=responses)
+        return render_template('thank_you.html')
     else:
         return redirect(f"/questions/{next_question}")
+
+@app.route('/start_survey', methods=['POST'])
+def set_session():
+    session['responses'] = []
+    return redirect('questions/0')
 
 @app.after_request
 def add_header(response):
