@@ -1,0 +1,37 @@
+.blocks{
+   display: inline-flex;
+   justify-content: center;
+   align-items: center;
+   padding: 0px;
+   margin: 0px;
+   border: 1px solid blue;
+   font-size: 20px;
+   font-weight: bold;
+   text-align: center;
+   color: white;
+   height: 3em;
+   width: 3em;
+}
+
+.block-row{
+   padding: 0px;
+   margin: 3px;
+}
+
+.turn-blue{
+   color:blue;
+}
+
+.hidden-div {
+   display: none;
+   background-color: rgb(17, 243, 243);
+ }
+
+.hidden{
+   display: none;
+}
+
+
+.blue-background{
+   background-color: blue;
+}

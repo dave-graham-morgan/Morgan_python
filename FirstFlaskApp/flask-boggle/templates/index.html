@@ -1,0 +1,40 @@
+{% extends 'base.html' %}
+{% block title %}Boggle{% endblock %}
+{% block content %}
+   <!-- show the board -->
+   <div class="container">
+      <div class="row text-center turn-blue">
+         <h1 class="display-1">BOGGLE</h1>
+         <h2 id="scoreDiv"></h2>
+      </div>
+      <div class="row text-center m-3">
+         <div class="col">
+            {% for row in board %}
+            <div class="block-row">
+               {% for letter in row %}
+                     <span class="blocks">{{letter}}</span>
+               {% endfor %}
+            </div>  
+         {% endfor %}
+        </div>
+      </div>
+
+      <!-- show the score and input form -->
+      <div class="row justify-content-center " id="message">
+      </div>
+      <div class="row justify-content-center">
+         <div class="col-auto">
+            <div class="btn btn-primary" id="start">Start</div>
+         </div>
+      </div>
+      <div class="row justify-content-center">
+         <div class="col-md-4 border shadow rounded p-3 m-3" id="input-form">
+            <div class="mb-3">
+               <input type="text" class="form-control" placeholder="your attempt" id="attempted-text" autofocus>
+            </div>
+            <button class="btn btn-primary btn-lg w-100" id="submit-word">Submit</button>
+         </div>
+      </div>
+   </div>
+   
+{% endblock %}
