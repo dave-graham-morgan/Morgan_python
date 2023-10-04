@@ -6,9 +6,10 @@ from boggle import Boggle
 app = Flask(__name__)
 app.config['SECRET_KEY'] = "201-989-215-4145-4433"
 
+#enable debugToolbar 
 debug = DebugToolbarExtension(app)
 
-#initialize the gameboard
+#initialize the Boggle object as well as the gameboard
 boggle_game = Boggle()
 board = [[]]
 
@@ -17,13 +18,17 @@ def render_game_board():
     board = boggle_game.make_board()
     session['game_board'] = board
     session['user_guesses'] = []
-    print(session['game_board'])
     return render_template('index.html', board=session['game_board'])
 
 
 @app.route('/handle-response')
 def check_user_response():
     curr_guess = request.args.get('guess')
+    return check_guess(curr_guess)     
+
+#easier to test if we break out check_guess
+def check_guess(curr_guess):
+    #check the user hasn't already guessed this word
     if curr_guess in session.get('user_guesses'):
         return jsonify('previous')
     
@@ -31,6 +36,7 @@ def check_user_response():
     all_guesses = session.get('user_guesses')
     all_guesses.append(curr_guess)
     session['user_guesses'] = all_guesses
+    
 
     #check to see if the current guess is valid
     is_valid = boggle_game.check_valid_word(session['game_board'], curr_guess)

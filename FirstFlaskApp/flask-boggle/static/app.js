@@ -70,7 +70,7 @@ function cleanUp(){
 //response is shown to the screen
 async function submitWord(evt){
    evt.preventDefault();
-   const userGuess = $("#attempted-text").val();
+   const userGuess = $("#attempted-text").val().toLowerCase();
    if(userGuess){
       const response = await axios({
          url: `/handle-response`,
