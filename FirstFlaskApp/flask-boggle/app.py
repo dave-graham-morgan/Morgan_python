@@ -1,23 +1,25 @@
-from flask import Flask,render_template, session, request, jsonify, flash
+from flask import Flask,render_template, session, request, jsonify, flash, redirect
 from flask_debugtoolbar import DebugToolbarExtension
 from boggle import Boggle
 
-#set up Flask and debug toolbar
+#set up Flask and secret key for encoding the session
 app = Flask(__name__)
 app.config['SECRET_KEY'] = "201-989-215-4145-4433"
 
-#debug = DebugToolbarExtension(app)
+debug = DebugToolbarExtension(app)
 
 #initialize the gameboard
 boggle_game = Boggle()
-board = boggle_game.make_board()
-
+board = [[]]
 
 @app.route('/')
 def render_game_board():
-   session['game_board'] = board
-   session['user_guesses'] = []
-   return render_template('index.html', board=session['game_board'])
+    board = boggle_game.make_board()
+    session['game_board'] = board
+    session['user_guesses'] = []
+    print(session['game_board'])
+    return render_template('index.html', board=session['game_board'])
+
 
 @app.route('/handle-response')
 def check_user_response():
@@ -31,8 +33,8 @@ def check_user_response():
     session['user_guesses'] = all_guesses
 
     #check to see if the current guess is valid
-    is_it_valid = boggle_game.check_valid_word(session['game_board'], curr_guess)
-    return jsonify(is_it_valid) 
+    is_valid = boggle_game.check_valid_word(session['game_board'], curr_guess)
+    return jsonify(is_valid) 
 
 @app.after_request
 def add_header(response):

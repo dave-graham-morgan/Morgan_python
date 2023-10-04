@@ -20,15 +20,37 @@ class Boggle():
 
     def make_board(self):
         """Make and return a random boggle board."""
-
         board = []
+        blocks = self.get_letters()
 
-        for y in range(5):
-            row = [choice(string.ascii_uppercase) for i in range(5)]
+        for y in range(4):
+            row = []
+            for i in range(4):
+                letter = choice(blocks)
+                row.append(letter)
+                blocks.remove(letter)
             board.append(row)
-
         return board
 
+    def get_letters(self):
+        letters = []
+        """we want to use actual blocks from the game and not random letters"""
+        blocks = [
+            ['A','E','A','N','E','G'], ['A','H','S','P','C','O'],['A','S','P','F','F','K'],['O','B','J','O','A','B'],
+            ['I','O','T','M','U','C'],['R','Y','V','D','E','L'],['L','R','E','I','X','D'],['E','I','U','N','E','S'],
+            ['W','N','G','E','E','H'],['L','N','H','N','R','Z'],['T','S','T','I','Y','D'],['O','W','T','O','A','T'],
+            ['E','R','T','T','Y','L'],['T','O','E','S','S','I'],['T','E','R','W','H','V'],['N','U','I','H','M','J']
+        ]
+        # blocks = [
+        #     ['A','A','A','A','A','A'], ['B','B','B','B','B','B'],['C','C','C','C','C','C'],['D','D','D','D','D','D'],
+        #     ['E','E','E','E','E','E'],['F','F','F','F','F','F'],['G','G','G','G','G','G'],['H','H','H','H','H','H'],
+        #     ['I','I','I','I','I','I'],['J','J','J','J','J','J'],['K','K','K','K','K','K'],['L','L','L','L','L','L'],
+        #     ['M','M','M','M','M','M'],['N','N','N','N','N','N'],['O','O','O','O','O','O'],['P','P','P','P','P','P']
+        # ] 
+        for block in blocks: 
+            letters.append(choice(block))
+        return letters
+    
     def check_valid_word(self, board, word):
         """Check if a word is a valid word in the dictionary and/or the boggle board"""
 
@@ -47,14 +69,14 @@ class Boggle():
     def find_from(self, board, word, y, x, seen):
         """Can we find a word on board, starting at x, y?"""
 
-        if x > 4 or y > 4:
+        if x > 3 or y > 3:
             return
 
         # This is called recursively to find smaller and smaller words
         # until all tries are exhausted or until success.
 
         # Base case: this isn't the letter we're looking for.
-
+        # print(f"y is: {y} and x is: {x}")
         if board[y][x] != word[0]:
             return False
 
@@ -96,7 +118,7 @@ class Boggle():
             if self.find_from(board, word[1:], y - 1, x, seen):
                 return True
 
-        if y < 4:
+        if y < 3:
             if self.find_from(board, word[1:], y + 1, x, seen):
                 return True
 
@@ -104,7 +126,7 @@ class Boggle():
             if self.find_from(board, word[1:], y, x - 1, seen):
                 return True
 
-        if x < 4:
+        if x < 3:
             if self.find_from(board, word[1:], y, x + 1, seen):
                 return True
 
@@ -113,15 +135,15 @@ class Boggle():
             if self.find_from(board, word[1:], y - 1, x - 1, seen):
                 return True
 
-        if y < 4 and x < 4:
+        if y < 3 and x < 3:
             if self.find_from(board, word[1:], y + 1, x + 1, seen):
                 return True
 
-        if x > 0 and y < 4:
+        if x > 0 and y < 3:
             if self.find_from(board, word[1:], y + 1, x - 1, seen):
                 return True
 
-        if x < 4 and y > 0:
+        if x < 3 and y > 0:
             if self.find_from(board, word[1:], y - 1, x + 1, seen):
                 return True
         # Couldn't find the next letter, so this path is dead
@@ -134,8 +156,8 @@ class Boggle():
         # Find starting letter --- try every spot on board and,
         # win fast, should we find the word at that place.
 
-        for y in range(0, 5):
-            for x in range(0, 5):
+        for y in range(0, 4):
+            for x in range(0, 4):
                 if self.find_from(board, word, y, x, seen=set()):
                     return True
 

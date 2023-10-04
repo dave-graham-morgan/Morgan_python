@@ -1,34 +1,45 @@
 {% extends 'base.html' %}
 {% block title %}Boggle{% endblock %}
 {% block content %}
-   <!-- show the board -->
+   <!-- show the title -->
    <div class="container">
       <div class="row text-center turn-blue">
          <h1 class="display-1">BOGGLE</h1>
-         <h2 id="scoreDiv"></h2>
+         <h3 class="display-4" id="scoreDiv">Score: 0</h3>
       </div>
+
+      <!-- show the countdown timer -->
+      <div class="row text-center turn-blue">
+         <div class="col-3 mx-auto justify-content-center" id="countdown">
+         </div>
+      </div>
+
+      <!-- display the board, its hidden until the user clicks start -->
       <div class="row text-center m-3">
-         <div class="col">
+         <div class="col hidden-div" id="board-container">
             {% for row in board %}
             <div class="block-row">
                {% for letter in row %}
-                     <span class="blocks">{{letter}}</span>
+                     <span class="blocks" id="blocks">{{letter}}</span>
                {% endfor %}
             </div>  
          {% endfor %}
         </div>
       </div>
 
-      <!-- show the score and input form -->
-      <div class="row justify-content-center " id="message">
-      </div>
+      <!-- feedback to the user on their attempt -->
+      <div class="row justify-content-center " id="message"></div>  
+
+      <!-- start button which we will hide once clicked -->
       <div class="row justify-content-center">
          <div class="col-auto">
             <div class="btn btn-primary" id="start">Start</div>
          </div>
       </div>
+
+      <!-- input form to capture the user's input -->
       <div class="row justify-content-center">
-         <div class="col-md-4 border shadow rounded p-3 m-3" id="input-form">
+         <div class="col-md-4 border shadow rounded p-3 m-3 hidden-div" id="input-form">
             <div class="mb-3">
                <input type="text" class="form-control" placeholder="your attempt" id="attempted-text" autofocus>
             </div>

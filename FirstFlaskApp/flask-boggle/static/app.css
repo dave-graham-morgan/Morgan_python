@@ -8,7 +8,7 @@
    font-size: 20px;
    font-weight: bold;
    text-align: center;
-   color: white;
+   color: blue;
    height: 3em;
    width: 3em;
 }
@@ -24,14 +24,4 @@
 
 .hidden-div {
    display: none;
-   background-color: rgb(17, 243, 243);
  }
-
-.hidden{
-   display: none;
-}
-
-
-.blue-background{
-   background-color: blue;
-}
