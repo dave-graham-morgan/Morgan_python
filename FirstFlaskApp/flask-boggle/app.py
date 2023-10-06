@@ -36,7 +36,6 @@ def check_guess(curr_guess):
     all_guesses = session.get('user_guesses')
     all_guesses.append(curr_guess)
     session['user_guesses'] = all_guesses
-    
 
     #check to see if the current guess is valid
     is_valid = boggle_game.check_valid_word(session['game_board'], curr_guess)

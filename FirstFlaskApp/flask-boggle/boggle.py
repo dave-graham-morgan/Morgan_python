@@ -76,7 +76,6 @@ class Boggle():
         # until all tries are exhausted or until success.
 
         # Base case: this isn't the letter we're looking for.
-        # print(f"y is: {y} and x is: {x}")
         if board[y][x] != word[0]:
             return False
 

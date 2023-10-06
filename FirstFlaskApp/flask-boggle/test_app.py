@@ -58,11 +58,7 @@ class FlaskTests(TestCase):
             self.assertEqual(res.status_code, 200)
             self.assertEqual(res.get_data(as_text=True), '"previous"\n')
 
-    #def check_guess(curr_guess):
-    #def check_user_response()
-    #check for ok
-    #check for not valid word
-    #check for not on board
+    
 
 
         
