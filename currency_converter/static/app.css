@@ -1,0 +1,9 @@
+.custom-error {
+   border: 1px solid #dc3545;  /* Red border */
+   padding: 5px;
+   background-color: #f8d7da;  /* Light red background */
+   color: #721c24;  /* Dark red text color */
+   border-radius: 4px;  /* Rounded corners */
+   margin-bottom: 15px;  /* Spacing below the error message */
+   font-size: 0.9rem;  /* Slightly smaller font size */
+}

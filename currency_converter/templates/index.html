@@ -1,0 +1,44 @@
+{% extends 'base.html' %}
+{% block title %}Currency Converter{% endblock %}
+{% block content %}
+<div class="container">
+   <!-- <div class="row text-center">
+      <div class="col-3 mx-auto justify-content-center alert alert-danger text-danger">danger
+      </div>
+   </div> -->
+   <div class="row text-center">
+      <div col-3 mx-auto justify-content-center>
+         {% with messages = get_flashed_messages() %}
+            {% if messages %}
+               {% for message in messages %}
+               <div class=" col-3 m-3 mx-auto alert alert-danger text-danger">
+                  {{ message }}
+               </div>
+                  
+               {% endfor %}
+            {% endif %}
+         {% endwith %}
+      </div>
+   </div>
+   <form action="/convert" method="post">
+      <div class="row justify-content-center">
+         <div class="col-md-4 border shadow rounded p-3 m-3 hidden-div" id="input-form">
+            <div class="mb-3">
+                  <label for="currency-from" class="form-label">Converting From:</label>
+                  <input type="text" class="form-control" placeholder="currency code 'From'" value="{{data.get('currency-from')}}" id="currency-from" name="currency-from" autofocus>
+            </div>
+            <div class="mb-3">
+                  <label for="currency-to" class="form-label">Converting to:</label>
+                  <input type="text" class="form-control " placeholder="currency code 'To'" value="{{data.get('currency-to')}}"id="currency-to" name="currency-to">
+            </div>
+            <div class="mb-3">
+                  <label for="amount" class="form-label">Amount To convert:</label>
+                  <input type="text" class="form-control" placeholder="enter a quantity" value="{{data.get('amount')}}"id="amount" name="amount">
+            </div>
+            <button type="submit" class="btn btn-primary btn-lg w-100" id="submit-word">Submit</button>
+         </div>
+      </div>
+   </form>
+   
+</div>
+{% endblock %}
