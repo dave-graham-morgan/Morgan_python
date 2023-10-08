@@ -61,7 +61,18 @@ def do_calculation():
               'to': currency_to,
               'amount': amount,
               'access_key': API_KEY}
-    return requests.get(url = URL, params = PARAMS).json()
+    res = requests.get(url = URL, params = PARAMS).json()
+    try:
+        #convert the result into a two decimal float... safely
+        result = round(float(res.get('result')),2)
+    except:
+        print("did not convert to int correctly")
+
+    return {'from': res.get('query').get('from'),
+            'to': res.get('query').get('to'),
+            'amount': res.get('query').get('amount'),
+            'result': result
+            }
     
 
 def validate_form(form_data):
