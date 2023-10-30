@@ -14,8 +14,6 @@ app.config['SECRET_KEY'] = "CALL-JENNY-867-5309"
 # enable debugToolbar
 debug = DebugToolbarExtension(app) #i'm getting a weird error when trying to import debugtoolbar! 
 
-
-
 with app.app_context():
    connect_db(app)
    db.drop_all()
