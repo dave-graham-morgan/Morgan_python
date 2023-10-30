@@ -1,0 +1,13 @@
+{% extends 'base.html' %}
+{% block title %}User Details{% endblock %}
+
+{% block content %}
+<h1>User Details:</h1>
+
+<h5>First Name: {{user.first_name}}</h5>
+<h5>Last Name: {{user.last_name}}</h5>
+<h5>Image URL: {{user.image_url}}</h5>
+<button onclick="window.location.href='/'" class="btn btn-primary">Home</button>
+<button onclick="window.location.href='/edit_user/{{user.id}}'" class="btn btn-info">Edit</button>
+<button onclick="window.location.href='/delete_user/{{user.id}}'" class="btn btn-danger">Delete</button>
+{% endblock %}
