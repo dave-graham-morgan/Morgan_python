@@ -1,0 +1,11 @@
+{% extends 'base.html' %}
+{% block title %}Post Details{% endblock %}
+{% block content %}
+<h1>{{post.title}}</h1>
+<h5>written by {{user.first_name}}</h5>
+<div>
+   <p>{{post.content}}</p>
+</div>
+<button onclick="window.location.href='/user_details/{{user.id}}'" class="btn btn-primary">Back</button>
+<button onclick="window.location.href='/edit_post/{{post.id}}'" class="btn btn-info">Edit</button>
+{% endblock %}
