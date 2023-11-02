@@ -25,7 +25,7 @@ class User(db.Model):
    image_url = db.Column(db.String(10000),
                   nullable = True,
                   unique = False)
-   posts = db.relationship('Post', backref='author',lazy=True)
+   posts = db.relationship('Post', backref='author') #lazy=True
                            
 
 class Post(db.Model):
@@ -34,9 +34,21 @@ class Post(db.Model):
    id = db.Column(db.Integer,
                   primary_key = True,
                   autoincrement=True)
-   title = db.Column(db.String(300),
-                     nullable = False)
+   title = db.Column(db.String(300), nullable = False)
    content = db.Column(db.String(10000))
-   user_id = db.Column(db.Integer, 
-                       db.ForeignKey('users.id'),
-                       nullable=False)
+   user_id = db.Column(db.Integer, db.ForeignKey('users.id'), nullable=False)
+   tags = db.relationship('Tag', secondary='post_tags', backref=db.backref('posts'))
+   
+class Tag(db.Model):
+   """many to many posts to users"""
+   __tablename__ = "tags"
+   id = db.Column(db.Integer, primary_key = True, autoincrement=True)
+   name = db.Column(db.String(300), nullable=False)
+
+class PostTag(db.Model):
+   """join table for Tag and Post"""
+   __tablename__="post_tags"
+   post_id = db.Column(db.Integer, db.ForeignKey('posts.id'), primary_key=True)
+   tag_id = db.Column(db.Integer, db.ForeignKey('tags.id'), primary_key=True)
+
+   

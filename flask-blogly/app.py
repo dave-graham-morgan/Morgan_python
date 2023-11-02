@@ -1,7 +1,7 @@
 """Blogly application."""
 
-from flask import Flask, render_template, session, request,jsonify, flash, redirect, url_for
-from models import db, connect_db, User, Post
+from flask import Flask, render_template, session, request, jsonify, flash, redirect, url_for
+from models import db, connect_db, User, Post, Tag, PostTag
 from flask_debugtoolbar import DebugToolbarExtension  
 
 app = Flask(__name__)
@@ -23,6 +23,12 @@ with app.app_context():
    db.session.commit()
    seed_post = Post(title="how to avoid police", content="don't do anything illegal and don't go outside", user_id = 1)
    db.session.add(seed_post)
+   db.session.commit()
+   seed_tag = Tag(name="new")
+   db.session.add(seed_tag)
+   db.session.commit()
+   seed_post_tag = PostTag(post_id=1, tag_id=1)
+   db.session.add(seed_post_tag)
    db.session.commit()
 
 @app.route("/")
@@ -95,17 +101,24 @@ def save_new_post(user_id):
 def show_post_details(id):
    post = Post.query.get(id)
    user = User.query.get(post.user_id)
-   
-   if(post and user):
+   if(post):
+      tags = post.tags
+   if(post and user and tags):
+      return render_template("post_details_tags.html", post = post, user=user, tags=tags)
+   elif(post and user):
       return render_template("post_details.html", post=post, user=user)
+   
    
 @app.route("/edit_post/<int:id>")
 def edit_post(id):
    post = Post.query.get(id)
-   print("*******************")
-   print("post title is: " + post.title)
    user = User.query.get(post.user_id)
-   if (post and user):
+   selected_tags = post.tags
+   all_tags = Tag.query.all()
+
+   if(post and user and selected_tags and all_tags):
+      return render_template("edit_post.html", post=post, user=user, all_tags=all_tags)
+   elif (post and user):
       return render_template("edit_post.html", post=post, user=user)
 
 @app.route("/update_post/<int:id>", methods = ['POST'])
@@ -114,9 +127,72 @@ def update_post(id):
    if (post):
       post.title = request.form['title']
       post.content = request.form['content']
+      checked_tag_str_ids = request.form.getlist('tags[]')
+      #we need to delete any PostTag records for this post or we will get integrity error
+      PostTag.query.filter(PostTag.post_id == id).delete()
+      db.session.commit()
+
+      for tag_id_str in checked_tag_str_ids:
+         tag_id = int(tag_id_str)  #I would normally put a try block around this but I'm lazy
+         new_tag = PostTag(post_id = post.id, tag_id=tag_id)
+         db.session.add(new_tag)
       
       db.session.commit()
       return redirect (f'/user_details/{post.user_id}')
+
+@app.route("/tags/new", methods=['GET'])
+def show_new_tag_form():
+   return render_template("new_tag_form.html")
+
+@app.route("/tags/new", methods=['POST'])
+def add_new_tag():
+   new_tag = Tag(name=request.form['tag'])
+   db.session.add(new_tag)
+   db.session.commit()
+   return redirect ('/tags')
+
+@app.route("/tags/<int:id>/edit", methods=["GET"])
+def edit_existing_tag(id):
+   tag = Tag.query.get(id)
+   if(tag):
+      return render_template('edit_tag.html', tag=tag)
+
+@app.route("/tags/<int:id>/edit", methods=["POST"])
+def update_existing_tag(id):
+   tag = Tag.query.get(id)
+   if (tag):
+      tag.name = request.form['tag-name']
+      db.session.add(tag)
+      db.session.commit()
+      
+      return redirect("/tags")
+
+@app.route("/tags")
+def show_tag_list_page():
+   tags = Tag.query.all()
+   return render_template("tag_list_page.html", tags=tags)
+
+@app.route("/tags/<int:id>")
+def show_tag_details(id):
+   tag = Tag.query.get(id)
+   return render_template("tag_details.html", tag=tag)
+
+@app.route("/tag/<int:id>/delete", methods=["POST"])
+def delete_tag(id):
+   #first delete from join table
+   PostTag.query.filter(PostTag.tag_id == id).delete()
+   db.session.commit() #commit so we don't get foreign key constraint violation
+
+   #now we can delete the tag itself
+   tag = Tag.query.get(id)
+   if(tag):
+      db.session.delete(tag)
+      db.session.commit()
+   return redirect("/")
+
+
+
+
 
 @app.errorhandler(404)
 def page_not_found(error):

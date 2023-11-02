@@ -2,16 +2,23 @@
 {% block title %}Add Post{% endblock %}
 {% block content %}
 <h1>Add new post for {{user.first_name}} {{user.last_name}}</h1>
-<form action="/new_post/{{user.id}}" method="POST">
-   <div class="mb-3">
-      <label for="post-title" class="form-label">Post Title</label>
-      <input type="text" clas="form-control" placeholder="Title" name="title" id="post-title">
+<div class="container">
+   <div class="row">
+      <div class="col-6">
+         <form action="/new_post/{{user.id}}" method="POST">
+            <div class="mb-3">
+               <label for="post-title" class="form-label">Post Title</label>
+               <input type="text" class="form-control" placeholder="Title" name="title" id="post-title">
+            </div>
+            <div class="mb-3">
+               <label for="post-content">Post Content</label>
+               <textarea class="form-control" name="content" id="post-content"></textarea>
+            </div>
+            <button type="submit" class="btn btn-primary">Submit</button>
+            
+         </form>
+         <button onclick="window.location.href='/user_details/{{user.id}}'" class="btn btn-info">Cancel</button>
+      </div>
    </div>
-   <div class="mb-3">
-      <label for="post-content">Post Content</label>
-      <textarea class="form-control" name="content" id="post-content"></textarea>
-   </div>
-   <button type="submit" class="btn btn-primary">Submit</button>
-
-</form>
+</div>
 {% endblock%}

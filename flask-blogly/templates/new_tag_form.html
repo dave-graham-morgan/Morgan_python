@@ -1,0 +1,23 @@
+{% extends 'base.html' %}
+{% block title %}Create New Tag{% endblock %}
+{% block content %}
+
+
+   <div class="container">
+      <h1>Create a new tag:</h1>
+      <div class="row">
+         <div class="col-3">
+            <form action="/tags/new" method="POST">
+               <label for="tag-text" class="form-label"><strong>Tag</strong></label>
+               <input type="text" placeholder="Enter a name for the tag" name="tag" id="tag-text" class="form-control">
+               <div class="d-flex justify-content-end m-3">
+                  <button type="submit" class="btn btn-success">Save</button>
+               </div> 
+            </form>
+         </div>
+      </div>
+   </div>
+   
+
+
+{% endblock %}

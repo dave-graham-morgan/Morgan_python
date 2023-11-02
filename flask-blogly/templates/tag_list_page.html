@@ -1,0 +1,12 @@
+{% extends 'base.html' %}
+{% block title %}Tag List Page{% endblock %}
+{% block content %}
+<h1>Tags:</h1>
+{%for tag in tags%}
+   <div>
+      <a href="/tags/{{tag.id}}">{{tag.name}}</a>
+   </div>
+{% endfor %}
+<button onclick="window.location.href='/'" class="btn btn-primary">Back</button>
+<button onclick="window.location.href='/tags/new'" class="btn btn-success">New Tag</button>
+{% endblock %}

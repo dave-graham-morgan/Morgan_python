@@ -9,6 +9,12 @@
          <div>
             <p>{{post.content}}</p>
          </div>
+         <h5>Tags:</h5>
+            <div>
+               {% for tag in tags%}
+                  {{tag.name}}
+               {% endfor %}
+            </div>
          <button onclick="window.location.href='/user_details/{{user.id}}'" class="btn btn-primary">Back</button>
          <button onclick="window.location.href='/edit_post/{{post.id}}'" class="btn btn-info">Edit</button>
       </div>

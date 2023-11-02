@@ -1,17 +1,35 @@
 {% extends 'base.html' %}
 {% block title %}Edit Post{% endblock %}
 {% block content %}
-<h1>Edit post</h1>
-<form action="/update_post/{{post.id}}" method="POST">
-   <div class="mb-3">
-      <label for="post-title" class="form-label">Post Title</label>
-      <input type="text" class="form-control" value="{{post.title}}" name="title" id="post-title"> <!-- value="{{post.title}}" -->
+<div class="container">
+   <div class="row">
+      <div class="col-5">
+         <h1>Edit post</h1>
+         <form action="/update_post/{{post.id}}" method="POST">
+            <div class="mb-3">
+               <label for="post-title" class="form-label">Post Title</label>
+               <input type="text" class="form-control" value="{{post.title}}" name="title" id="post-title"> <!-- value="{{post.title}}" -->
+            </div>
+            <div class="mb-3">
+               <label for="post-content">Post Content</label>
+               <textarea class="form-control" name="content" id="post-content">{{post.content}}</textarea>
+            </div>
+            <div>
+               {%for tag in all_tags%}
+               <div class="form-check">
+                  <input class="form-check-input" type="checkbox" name="tags[]" id="tag_{{tag.id}}" value="{{tag.id}}"
+                  {%if tag in post.tags%} checked {% endif %}>
+                  <label for="tag_{{tag.id}}" class="form-check-label">
+                  {{tag.name}} 
+                  </label>
+               </div>
+               {% endfor %}
+            </div>
+            <button type="submit" class="btn btn-primary">Submit</button>
+            
+         </form>
+         <button onclick="window.location.href='/'" class="btn btn-success">Back</button>
+      </div>
    </div>
-   <div class="mb-3">
-      <label for="post-content">Post Content</label>
-      <textarea class="form-control" name="content" id="post-content">{{post.content}}</textarea>
-   </div>
-   <button type="submit" class="btn btn-primary">Submit</button>
-
-</form>
+</div>
 {% endblock %}
