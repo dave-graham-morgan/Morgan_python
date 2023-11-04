@@ -1,0 +1,42 @@
+{% extends 'base.html' %}
+{% block title %}Adopt a Pet{% endblock %}
+{% block content %}
+{%for msg in get_flashed_messages()%}
+   <p class="flash">{{msg}}</p>
+{% endfor %}
+
+
+
+<div class="container">
+   <div class="row">
+      <h1>Adopt a pet</h1>
+      <div class="col-md-8">
+         <table class="table table-striped">
+            <thead>
+               <th>Name</th>
+               <th>Species</th>
+               <th>Availability</th>
+            </thead>
+            <tbody>
+               {%for pet in pets%}
+               <tr>
+                  <td><a href="/pet_details/{{pet.id}}">{{pet.name}}</a></td>
+                  <td>{{pet.species}}</td>
+                  {% if pet.available %}
+                  <td>Available</td>
+                  {% else %}
+                  <td>Sold</td>
+                  {% endif %}
+               </tr>
+               {% endfor %}
+            </tbody>
+         </table>
+         <a href="/add" class="btn btn-primary">Add Pet</a>
+         
+      </div>
+   </div>
+</div>
+
+
+
+{% endblock %}

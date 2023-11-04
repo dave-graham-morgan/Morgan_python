@@ -1,0 +1,6 @@
+.flash{
+   background-color: #ffdddd; /* Light red background */
+   color: #8b0000; /* Dark red text color */
+   padding: 10px; /* Padding around the content */
+   border: 1px solid #8b0000; /* Dark red border */
+ }
