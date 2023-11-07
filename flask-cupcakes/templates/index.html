@@ -1,0 +1,25 @@
+{% extends 'base.html' %}
+{% block title %}Home{% endblock %}
+{% block content %}
+<ul id="ulElement">
+   <h1>Cupcakes:</h1>>
+</ul>
+
+<form action="/your-server-endpoint" method="post" id="cupcakeForm">
+   <label for="flavor">Flavor:</label><br>
+   <input type="text" id="flavor" name="flavor" required><br>
+ 
+   <label for="size">Size:</label><br>
+   <input type="text" id="size" name="size" required><br>
+ 
+   <label for="rating">Rating:</label><br>
+   <input type="text" id="rating" name="rating" required><br>
+ 
+   <label for="image_url">Image URL:</label><br>
+   <input type="text" id="image_url" name="image_url"><br>
+ 
+   <input type="submit" value="Submit">
+ </form>
+
+
+{% endblock %}
