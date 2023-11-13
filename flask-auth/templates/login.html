@@ -1,0 +1,21 @@
+{% extends 'base.html' %}
+{% block title %}Login{% endblock %}
+{% block content %}
+
+<form action="/login" method="POST">
+{{form.hidden_tag()}} 
+   {% for field in form 
+                  if field.widget.input_type != 'hidden'%}
+      <div> 
+         <p>{{field.name}}
+         {% if field.flags.required %}
+            <span class="form-text text-warning-emphasis text-right">*Required Field</span></p>
+         {% endif %}
+      </div>
+      <p>{{field(class_="form-control")}}</p>
+   {% endfor %}
+   <button type="submit" class="btn btn-primary">Login</button>
+   <a href="/" class="btn btn-primary">Cancel</a>
+</form>
+
+{% endblock %}

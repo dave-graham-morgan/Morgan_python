@@ -1,0 +1,23 @@
+{% extends 'base.html' %}
+{% block title %}Register{% endblock %}
+{% block content %}
+
+<form action="/register" method="POST" class="form-control shadow">
+   {{form.hidden_tag()}} 
+   {% for field in form 
+                  if field.widget.input_type != 'hidden'%}
+   <div> 
+      <p>{{field.name}}
+      {% if field.flags.required %}
+         <span class="form-text text-warning-emphasis text-right">*Required Field</span></p>
+      {% endif %}
+   </div>   
+   <p>{{field(class_="form-control")}}</p>
+      {% for err in field.errors%}
+         <div class={"form-text text-danger">{{err}}</div>
+      {% endfor %}
+   {% endfor %}
+   <button action="submit" class="btn btn-primary">Submit</button>
+   <a href="/" class="btn btn-primary">Home</a>
+</form>
+{% endblock %}

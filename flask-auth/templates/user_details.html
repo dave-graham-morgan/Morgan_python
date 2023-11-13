@@ -1,0 +1,23 @@
+{% extends 'base.html' %}
+{% block title %}{{user.first_name}}{% endblock %}
+{% block content %}
+<h1>Showing Details for {{user.first_name}} {{user.last_name}}</h1>
+
+<div class="container">
+   <div class="row">
+      {% for f in feedback %}
+      <div><a href="/feedback/{{f.id}}">{{ f.title }}</a></div>
+      {% endfor %}
+   </div>
+</div>
+
+<a href="/" class="btn btn-primary">Home</a>
+{% if 'username' in session %}
+<a href="/logout" class="btn btn-primary">Logout</a>
+<a href="/users/{{user.username}}/feedback/add" class="btn btn-success">Add Feedback</a>
+{% else %}
+<a href="/login" class="btn btn-primary">Login</a>
+<a href="/register" class="btn btn-primary">Register</a>
+{% endif %}
+
+{% endblock %}
