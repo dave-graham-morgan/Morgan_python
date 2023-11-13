@@ -1,5 +1,5 @@
 """Flask app for Cupcakes"""
-from flask import Flask, render_template, request,jsonify
+from flask import Flask, make_response, render_template, request,jsonify
 from flask_wtf import FlaskForm
 from models import db, connect_db, Cupcake
 from forms import add_cupcake_form
@@ -34,22 +34,30 @@ def get_all_cupcakes():
 @app.route("/api/cupcakes/<int:id>")
 def get_a_cupcake(id):
    cupcake = Cupcake.query.get(id)
-   return f"{{cupcake: {serialize(cupcake)}}}"
+   serilized = serialize(cupcake)
+   return jsonify(cupcake=serilized)  #TODO return JSON
 
 @app.route("/api/cupcakes", methods=["POST"])
 def create_new_cupcake():
    data = request.get_json()
-   
-   flavor = data.get("flavor")
-   size = data.get('size')
-   rating = data.get('rating')
-   image = data.get('image')
+
+   #i'm just going to check this simply this round. I will use flask-wtf going forward for request validation
+   if data.get("flavor") and data.get('size') and data.get('rating') and data.get('image'):
+      flavor = data.get("flavor")
+      size = data.get('size')
+      rating = data.get('rating')
+      image = data.get('image')
 
    new_cupcake = Cupcake(flavor = flavor, size=size, rating=rating,image=image)
    db.session.add(new_cupcake)
-   db.session.commit()
-   
-   return jsonify(cupcake=serialize(new_cupcake))
+   #put this in try catch do this for anything external
+   try:
+      db.session.commit()
+   except Exception as e:
+      print("Exception occured writing to db")
+      print(e)
+   reponse = make_response(jsonify(cupcake=serialize(new_cupcake)), 201)
+   return reponse
 
 @app.route("/api/cupcakes/<int:id>", methods=["PATCH"])
 def update_cupcake(id):
@@ -62,7 +70,7 @@ def update_cupcake(id):
    cupcake.image = data.get("image")
 
    db.session.add(cupcake)
-   db.session.commit()
+   db.session.commit()  ##try catch
 
    return jsonify(cupcake=serialize(cupcake))
 
@@ -80,9 +88,6 @@ def serialize(cupcake):
           "rating": cupcake.rating,
           "image":cupcake.image
          }
-
-
-
 
 @app.errorhandler(404)
 def page_not_found(error):
