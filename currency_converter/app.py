@@ -66,7 +66,7 @@ def do_calculation():
         #convert the result into a two decimal float... safely
         result = round(float(res.get('result')),2)
     except:
-        print("did not convert to int correctly")
+        print("something went wrong, not possible to convert response to int")
 
     return {'from': res.get('query').get('from'),
             'to': res.get('query').get('to'),
@@ -74,7 +74,6 @@ def do_calculation():
             'result': result
             }
     
-
 def validate_form(form_data):
     currency_from = request.form['currency-from'].upper()
     currency_to = request.form['currency-to'].upper()
