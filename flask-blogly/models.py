@@ -43,7 +43,8 @@ class Tag(db.Model):
    """many to many posts to users"""
    __tablename__ = "tags"
    id = db.Column(db.Integer, primary_key = True, autoincrement=True)
-   name = db.Column(db.String(300), nullable=False)
+   name = db.Column(db.String(300), nullable=False) 
+   #posts = db.relationship('Post', secondary='post_tags', backref=db.backref('tags'))
 
 class PostTag(db.Model):
    """join table for Tag and Post"""

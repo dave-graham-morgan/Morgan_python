@@ -1,6 +1,7 @@
 """Blogly application."""
 
 from flask import Flask, render_template, session, request, jsonify, flash, redirect, url_for
+from flask_wtf import FlaskForm
 from models import db, connect_db, User, Post, Tag, PostTag
 from flask_debugtoolbar import DebugToolbarExtension  
 
