@@ -1,0 +1,20 @@
+{% extends 'base.html' %}
+{% block title %}{{song.title}} - {{song.artist}}{% endblock %}
+{% block content %}
+
+<div class="jumbotron">
+  <h1>{{ song.title }}</h1>
+  <p class="lead">&ndash; {{ song.artist }}</p>
+</div>
+{%if song.playlists%}
+<h4>{{ song.title }} appears in the following playlists:</h4>
+{% endif %}
+<ul>  
+  {%for playlist in song.playlists%}
+    <li>
+      <div><a href="/playlists/{{playlist.id}}"> {{playlist.name}}</a></div>
+    </li>
+  {% endfor %}
+</ul>
+
+{% endblock %}
