@@ -20,6 +20,7 @@ app.config['SQLALCHEMY_DATABASE_URI'] = (
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 app.config['SQLALCHEMY_ECHO'] = False
 app.config['DEBUG_TB_INTERCEPT_REDIRECTS'] = False
+app.config['WTF_CSRF_ENABLED'] = True
 app.config['SECRET_KEY'] = os.environ.get('SECRET_KEY', "it's a secret")
 toolbar = DebugToolbarExtension(app)
 
@@ -158,14 +159,10 @@ def users_show(user_id):
                 .limit(100)
                 .all())
     
-    like_count = (db.session.query(Likes)
-                    .filter(Likes.user_id == g.user.id)
-                    .count())
     
     return render_template('users/show.html', 
                            user=user, 
-                           messages=messages, 
-                           like_count=like_count)
+                           messages=messages)
 
 
 @app.route('/users/<int:user_id>/following')
@@ -324,10 +321,13 @@ def messages_destroy(message_id):
         return redirect("/")
 
     msg = Message.query.get(message_id)
-    db.session.delete(msg)
-    db.session.commit()
-
-    return redirect(f"/users/{g.user.id}")
+    if msg.user_id != g.user.id:
+        flash("Access unauthorized.", "danger")
+        return redirect("/")
+    else:
+        db.session.delete(msg)
+        db.session.commit()
+        return redirect(f"/users/{g.user.id}")
 
 @app.route('/users/add_like/<int:msg_id>', methods=["POST"])
 def like_message(msg_id):
