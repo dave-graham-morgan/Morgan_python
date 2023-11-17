@@ -157,7 +157,15 @@ def users_show(user_id):
                 .order_by(Message.timestamp.desc())
                 .limit(100)
                 .all())
-    return render_template('users/show.html', user=user, messages=messages)
+    
+    like_count = (db.session.query(Likes)
+                    .filter(Likes.user_id == g.user.id)
+                    .count())
+    
+    return render_template('users/show.html', 
+                           user=user, 
+                           messages=messages, 
+                           like_count=like_count)
 
 
 @app.route('/users/<int:user_id>/following')
@@ -389,6 +397,14 @@ def homepage():
     else:
         return render_template('home-anon.html')
 
+@app.route('/users/<int:user_id>/likes', methods=["GET"])
+def show_likes(user_id):    
+    if not g.user:
+        flash("Access unauthorized.", "danger")
+        return redirect("/")
+
+    user = User.query.get_or_404(user_id)
+    return render_template('users/likes.html', user=user, likes=user.likes)
 
 ##############################################################################
 # Turn off all caching in Flask
