@@ -1,11 +1,12 @@
 import os
 
-from flask import Flask, render_template, request, flash, redirect, session, g
+from flask import Flask, render_template, request, flash, redirect, session, g, request 
 from flask_debugtoolbar import DebugToolbarExtension
 from sqlalchemy.exc import IntegrityError
 
-from forms import UserAddForm, LoginForm, MessageForm
-from models import db, connect_db, User, Message
+
+from forms import UserAddForm, LoginForm, MessageForm, UserEditForm
+from models import db, connect_db, User, Message, Likes
 
 CURR_USER_KEY = "curr_user"
 
@@ -18,7 +19,7 @@ app.config['SQLALCHEMY_DATABASE_URI'] = (
 
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 app.config['SQLALCHEMY_ECHO'] = False
-app.config['DEBUG_TB_INTERCEPT_REDIRECTS'] = True
+app.config['DEBUG_TB_INTERCEPT_REDIRECTS'] = False
 app.config['SECRET_KEY'] = os.environ.get('SECRET_KEY', "it's a secret")
 toolbar = DebugToolbarExtension(app)
 
@@ -112,8 +113,14 @@ def login():
 @app.route('/logout')
 def logout():
     """Handle logout of user."""
-
-    # IMPLEMENT THIS
+    if g.user:
+        do_logout()
+        flash(f"{g.user.username} logged out successfully", "success")
+        g.user = None
+        return redirect("/")
+    else:
+        flash(f"User not logged in")
+        return redirect("/")
 
 
 ##############################################################################
@@ -210,9 +217,46 @@ def stop_following(follow_id):
 @app.route('/users/profile', methods=["GET", "POST"])
 def profile():
     """Update profile for current user."""
+    
+    #verify the user is logged in
+    if not g.user:
+        flash("Access unauthorized.", "danger")
+        return redirect("/")
+    
+    form = UserEditForm()
 
-    # IMPLEMENT THIS
+    if form.validate_on_submit():
+        #we cannot use form.username here, must get the username from g
+        user = User.authenticate(g.user.username,
+                                 form.password.data)
+        if not user:
+            flash(f"Access unauthorized", "danger")
+            return redirect("/")
+        else:
+            user.username = form.username.data
+            user.email = form.email.data
+            user.image_url = form.image_url.data
+            user.header_image_url = form.header_image_url.data
+            user.bio = form.bio.data
+            db.session.add(user)
+            try:
+                db.session.commit()
+                flash(f"user {user.username} updated succcessfully", "success")
+                return redirect(f"/users/{user.id}") 
+            except Exception as e:
+                flash("something bad happened, user not updated", "danger")
+                print(e)
+                return redirect("/")
 
+    else:
+        #pre-populate the form
+        form.username.data = g.user.username
+        form.email.data = g.user.email
+        form.image_url.data = g.user.image_url
+        form.header_image_url.data = g.user.header_image_url
+        form.bio.data = g.user.bio
+
+        return render_template("users/edit.html", form = form) 
 
 @app.route('/users/delete', methods=["POST"])
 def delete_user():
@@ -222,10 +266,9 @@ def delete_user():
         flash("Access unauthorized.", "danger")
         return redirect("/")
 
-    do_logout()
-
     db.session.delete(g.user)
     db.session.commit()
+    do_logout()
 
     return redirect("/signup")
 
@@ -278,6 +321,35 @@ def messages_destroy(message_id):
 
     return redirect(f"/users/{g.user.id}")
 
+@app.route('/users/add_like/<int:msg_id>', methods=["POST"])
+def like_message(msg_id):
+    """like a message"""
+    if not g.user:
+        flash("Access unauthorized", "danger")
+        return redirect("/")
+    
+    # check to see if we're unliking the message
+    existing_like = (db.session.query(Likes)
+                    .filter(Likes.message_id == msg_id, Likes.user_id == g.user.id)
+                    .first())
+
+    #if we don't already have this like, lets like it
+    if not existing_like:
+        new_like = Likes(user_id = g.user.id, message_id = msg_id) 
+        db.session.add(new_like)
+    
+    #it exists so we're unliking
+    else:
+        db.session.delete(existing_like)
+    
+    #commit either change
+    try:
+        db.session.commit()
+    except Exception as e:
+        flash("something went wrong liking that message", "danger")
+        print(e)
+
+    return redirect(request.referrer or '/')
 
 ##############################################################################
 # Homepage and error pages
@@ -292,13 +364,27 @@ def homepage():
     """
 
     if g.user:
-        messages = (Message
+        following_user_ids = [user.id for user in g.user.following]
+
+        if following_user_ids:
+            #add your ownself after checking if following_user_ids is truthy 
+            following_user_ids.append(g.user.id)
+            messages = (Message
+                        .query
+                        .filter(Message.user_id.in_(following_user_ids))
+                        .order_by(Message.timestamp.desc())
+                        .limit(100)
+                        .all())
+        else:
+            #we want to show messages if the user isn't following anyone. 
+            messages = (Message
                     .query
                     .order_by(Message.timestamp.desc())
                     .limit(100)
                     .all())
+        likes = [like.message_id for like in Likes.query.all()]
 
-        return render_template('home.html', messages=messages)
+        return render_template('home.html', messages=messages, likes = likes)
 
     else:
         return render_template('home-anon.html')
