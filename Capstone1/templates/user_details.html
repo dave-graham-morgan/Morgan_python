@@ -1,0 +1,87 @@
+{% extends 'base.html' %}
+{% block title %}User Details{% endblock %}
+{% block content %}
+<a href="/logout" class="btn btn-primary">logout</a>
+    <div class="container mt-4">
+        <!-- Navigation Tabs -->
+        <ul class="nav nav-tabs">
+            <li class="nav-item">
+                <a class="nav-link active" data-bs-toggle="tab" href="#satellites" id="satellite-tab">Satellites</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" data-bs-toggle="tab" href="#addresses" id="addresses-tab">Addresses</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" data-bs-toggle="tab" href="#viewings" id="viewings-tab">Viewings</a>
+            </li>
+        </ul>
+
+        <!-- Tab Content -->
+        <div class="tab-content">
+            <div id="satellites" class="container tab-pane fade show active"><br>
+                <h3>Satellites</h3>
+                <p>Click to track a satellite, click again to remove</p>
+                <div class="row">
+                  {% for satellite in satellites %}
+                  <div class="card col-3 satellite-container">
+                     <div class="card-body">
+                        <p id="{{satellite.id}}">{{satellite.name}}</p> 
+                     </div>
+                  </div>
+                  {% endfor %}
+               </div>
+            </div>
+            <div id="addresses" class="container tab-pane fade"><br>
+                <h3>My Addresses</h3>
+                <p>Click to make active</p>
+                <div class="row">
+                    <div class="col-6 m-0">
+                        <div class="address-list">
+                            {% for address in addresses%}
+                            <div class="row">
+                                <div class="card col-6 address-container {% if address.active == 1 %} text-bg-secondary {% endif %}">
+                                <div class="card-body p-2">
+                                    <p class="m-1">{{address.street_number}} {{address.street}}</p>
+                                    <p class="m-1">{{address.city}}, {{address.state}}  {{address.zip}} 
+                                        {% if address.zip_plus_4 %}
+                                        {{address.zip_plus_4}}
+                                        {% endif %}
+                                    </p>
+                                </div>
+                                </div>
+                            </div>
+                            {% endfor %}
+                        </div>
+                    </div>
+                    <div class="col-3 shadow rounded p-3 mb-5 bg-body-tertiary">
+                        <form method="POST" id="add-address-form">
+                        <h4><i class="fa-solid fa-plus"></i> Add New Address</h4>
+                        
+                            {{ address_form.hidden_tag() }}
+    
+                                {% for field in address_form if field.widget.input_type != 'hidden' %}
+                                    {% for error in field.errors %}
+                                    <span class="text-danger">{{ error }}</span>
+                                    {% endfor %}
+                                {{ field(placeholder=field.label.text, class="form-control") }}
+                                {% endfor %}
+                            <button class="btn btn-primary">Add</button>
+                        </form>
+                    
+                </div>
+            </div>
+            <div>
+                </div>
+            </div>
+            <div id="viewings" class="container tab-pane fade"><br>
+                <h3>Viewings</h3>
+                <p>Content for Viewings.</p>
+                <!-- Add your viewings content here -->
+            </div>
+        </div>
+    </div>
+{% endblock %}
+
+{% block script %}
+<script src="/static/user_details.js"></script>
+{% endblock %}
