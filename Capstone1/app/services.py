@@ -70,7 +70,7 @@ def do_calculate_viewings(active_address, satellites):
             #advance observer date to satellite set time and keep looking until we find an evening viewing
             observer.date = new_viewing.utc_set_time
             counter -= 1
-
+ 
    #save all new viewings
    try:
       db.session.commit() 

@@ -236,7 +236,7 @@ def display_homepage():
 def get_apod():
    apod = requests.get(f"https://api.nasa.gov/planetary/apod?api_key={os.environ.get('NASA_API_KEY')}")
    return Response(apod.text, content_type = 'application/json')
-
+ 
 ##############################################################################
 #     Viewings
 ##############################################################################

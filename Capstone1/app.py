@@ -28,7 +28,7 @@ if __name__ == '__main__':
        
    else:
       app = create_app(Config)
-      debug = False
+      debug = False 
       
 
 @app.before_request

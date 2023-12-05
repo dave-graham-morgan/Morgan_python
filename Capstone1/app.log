@@ -18007,3 +18007,27 @@ INFO:werkzeug:127.0.0.1 - - [05/Dec/2023 15:19:14] "GET /get_viewings HTTP/1.1" 
 INFO:werkzeug:127.0.0.1 - - [05/Dec/2023 15:19:16] "POST /add_satellite HTTP/1.1" 200 -
 INFO:root:refresing TLE data for SL-8 R/B
 INFO:werkzeug:127.0.0.1 - - [05/Dec/2023 15:19:18] "GET /get_viewings HTTP/1.1" 200 -
+INFO:werkzeug: * Detected change in '/Users/damorga/Desktop/Programming/Springboard/python/capstone1/app/forms.py', reloading
+INFO:werkzeug: * Restarting with stat
+WARNING:werkzeug: * Debugger is active!
+INFO:werkzeug: * Debugger PIN: 270-853-259
+INFO:werkzeug: * Detected change in '/Users/damorga/Desktop/Programming/Springboard/python/capstone1/app/models.py', reloading
+INFO:werkzeug: * Restarting with stat
+WARNING:werkzeug: * Debugger is active!
+INFO:werkzeug: * Debugger PIN: 270-853-259
+INFO:werkzeug: * Detected change in '/Users/damorga/Desktop/Programming/Springboard/python/capstone1/app/routes.py', reloading
+INFO:werkzeug: * Restarting with stat
+WARNING:werkzeug: * Debugger is active!
+INFO:werkzeug: * Debugger PIN: 270-853-259
+INFO:werkzeug: * Detected change in '/Users/damorga/Desktop/Programming/Springboard/python/capstone1/app/services.py', reloading
+INFO:werkzeug: * Restarting with stat
+WARNING:werkzeug: * Debugger is active!
+INFO:werkzeug: * Debugger PIN: 270-853-259
+INFO:werkzeug: * Detected change in '/Users/damorga/Desktop/Programming/Springboard/python/capstone1/app/utils.py', reloading
+INFO:werkzeug: * Restarting with stat
+WARNING:werkzeug: * Debugger is active!
+INFO:werkzeug: * Debugger PIN: 270-853-259
+INFO:werkzeug: * Detected change in '/Users/damorga/Desktop/Programming/Springboard/python/capstone1/app.py', reloading
+INFO:werkzeug: * Restarting with stat
+WARNING:werkzeug: * Debugger is active!
+INFO:werkzeug: * Debugger PIN: 270-853-259

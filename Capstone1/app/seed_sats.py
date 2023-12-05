@@ -9,7 +9,7 @@ db.create_all()
 
 with open('data/satellites.csv') as satellites:
    reader = csv.reader(satellites)
-   data = list(reader)
+   data = list(reader) 
 
 for i in range(0, len(data), 3):
    name = data[i][0]

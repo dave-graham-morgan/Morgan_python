@@ -44,7 +44,7 @@ $(document).ready(function(){
             zip : $('#zip').val()
         };
         console.log(JSON.stringify(addressData))
-
+ 
         $.ajax({
             url: '/add_address',
             type: 'POST',

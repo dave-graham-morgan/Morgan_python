@@ -6,3 +6,4 @@
 **/.DS_Store
 **/.env
 **/flask-example
+**/app.log

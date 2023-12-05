@@ -105,6 +105,6 @@ class Viewing(db.Model):
    utc_rise_time = db.Column(db.DateTime, nullable = False)
    local_rise_time = db.Column(db.DateTime, nullable = True)
    rise_direction = db.Column(db.String(3), nullable = False)
-   utc_set_time = db.Column(db.DateTime, nullable = False)
+   utc_set_time = db.Column(db.DateTime, nullable = False) 
    local_set_time = db.Column(db.DateTime, nullable = True)
    set_direction = db.Column(db.String(3), nullable = False)

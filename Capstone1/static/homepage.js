@@ -20,7 +20,7 @@ $(document).ready(function(){
       let backgroundUrl = resp.url
       console.log(backgroundUrl)
       $hero.css('background-image', 'url(' + backgroundUrl + ')')
-  }
+  } 
 
 })
 
