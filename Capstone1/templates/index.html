@@ -1,9 +1,19 @@
 {% extends 'base.html' %}
-{% block title %}Sign Up{% endblock %}
+{% block title %}Sattelite Tracker{% endblock %}
 {% block content %}
+<div class="home-hero" id="home">
+   <div class="overlay">
+      <h1>Satellite Tracker!</h1>
+      <h4>New?</h4>
+      <p>Sign up now to get peronsalized satellite viewing events!</p>
+      <p><a href="/sign_up" class="btn btn-primary btn-sm">Sign up</a>
+         <a href="/login"  class="btn btn-primary btn-sm">login</a>
+      </p>
+   </div>
+ </div>
 
 
-
-
-<a href="/sign_up" class="btn btn-success btn-sm">Sign Up</a>
+{% endblock %}
+{% block script %}
+<script src="/static/homepage.js"></script>
 {% endblock %}

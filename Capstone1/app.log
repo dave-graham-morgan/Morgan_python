@@ -17940,3 +17940,70 @@ INFO:werkzeug:127.0.0.1 - - [05/Dec/2023 15:12:17] "GET /get_viewings HTTP/1.1" 
 INFO:werkzeug:127.0.0.1 - - [05/Dec/2023 15:12:32] "POST /make_address_active HTTP/1.1" 200 -
 INFO:root:No satellite refresh needed
 INFO:werkzeug:127.0.0.1 - - [05/Dec/2023 15:12:33] "GET /get_viewings HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [05/Dec/2023 15:17:32] "GET /user_details HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [05/Dec/2023 15:17:32] "GET /static/app.css HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [05/Dec/2023 15:17:32] "GET /_debug_toolbar/static/js/toolbar.js HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [05/Dec/2023 15:17:32] "GET /_debug_toolbar/static/js/jquery.js HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [05/Dec/2023 15:17:32] "GET /_debug_toolbar/static/js/jquery.tablesorter.js HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [05/Dec/2023 15:17:32] "GET /static/user_details.js HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [05/Dec/2023 15:17:32] "GET /_debug_toolbar/static/css/toolbar.css?0.7757917608359248 HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [05/Dec/2023 15:17:32] "GET /get_user_satellites HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [05/Dec/2023 15:17:32] "GET /_debug_toolbar/static/img/djdt_vertical.png HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [05/Dec/2023 15:17:46] "POST /add_satellite HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [05/Dec/2023 15:17:56] "POST /make_address_active HTTP/1.1" 200 -
+INFO:root:No satellite refresh needed
+INFO:root:No satellite refresh needed
+INFO:werkzeug:127.0.0.1 - - [05/Dec/2023 15:18:00] "GET /get_viewings HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [05/Dec/2023 15:18:18] "POST /make_address_active HTTP/1.1" 200 -
+INFO:root:No satellite refresh needed
+INFO:root:No satellite refresh needed
+INFO:werkzeug:127.0.0.1 - - [05/Dec/2023 15:18:19] "GET /get_viewings HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [05/Dec/2023 15:18:29] "GET /logout HTTP/1.1" 302 -
+INFO:werkzeug:127.0.0.1 - - [05/Dec/2023 15:18:29] "GET / HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [05/Dec/2023 15:18:29] "GET /static/app.css HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [05/Dec/2023 15:18:29] "GET /_debug_toolbar/static/js/jquery.tablesorter.js HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [05/Dec/2023 15:18:29] "GET /_debug_toolbar/static/js/toolbar.js HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [05/Dec/2023 15:18:29] "GET /_debug_toolbar/static/js/jquery.js HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [05/Dec/2023 15:18:29] "GET /static/homepage.js HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [05/Dec/2023 15:18:29] "GET /static/default.jpeg HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [05/Dec/2023 15:18:29] "GET /_debug_toolbar/static/css/toolbar.css?0.9598459218881901 HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [05/Dec/2023 15:18:29] "GET /_debug_toolbar/static/img/djdt_vertical.png HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [05/Dec/2023 15:18:29] "GET /get_apod HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [05/Dec/2023 15:18:42] "GET /sign_up HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [05/Dec/2023 15:18:42] "GET /static/app.css HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [05/Dec/2023 15:18:42] "GET /_debug_toolbar/static/js/jquery.js HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [05/Dec/2023 15:18:42] "GET /_debug_toolbar/static/js/jquery.tablesorter.js HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [05/Dec/2023 15:18:42] "GET /_debug_toolbar/static/js/toolbar.js HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [05/Dec/2023 15:18:42] "GET /_debug_toolbar/static/css/toolbar.css?0.11084489174940604 HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [05/Dec/2023 15:18:42] "GET /_debug_toolbar/static/img/djdt_vertical.png HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [05/Dec/2023 15:18:52] "POST /sign_up HTTP/1.1" 302 -
+INFO:werkzeug:127.0.0.1 - - [05/Dec/2023 15:18:52] "GET /sign_up HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [05/Dec/2023 15:18:52] "GET /static/app.css HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [05/Dec/2023 15:18:52] "GET /_debug_toolbar/static/js/jquery.tablesorter.js HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [05/Dec/2023 15:18:52] "GET /_debug_toolbar/static/js/jquery.js HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [05/Dec/2023 15:18:52] "GET /_debug_toolbar/static/js/toolbar.js HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [05/Dec/2023 15:18:52] "GET /_debug_toolbar/static/css/toolbar.css?0.2067291801435045 HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [05/Dec/2023 15:18:52] "GET /_debug_toolbar/static/img/djdt_vertical.png HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [05/Dec/2023 15:18:55] "GET /login HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [05/Dec/2023 15:18:55] "GET /static/app.css HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [05/Dec/2023 15:18:55] "GET /_debug_toolbar/static/js/jquery.js HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [05/Dec/2023 15:18:55] "GET /_debug_toolbar/static/js/jquery.tablesorter.js HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [05/Dec/2023 15:18:55] "GET /_debug_toolbar/static/js/toolbar.js HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [05/Dec/2023 15:18:55] "GET /_debug_toolbar/static/css/toolbar.css?0.6871364205048096 HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [05/Dec/2023 15:18:55] "GET /_debug_toolbar/static/img/djdt_vertical.png HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [05/Dec/2023 15:18:59] "POST /login HTTP/1.1" 302 -
+INFO:werkzeug:127.0.0.1 - - [05/Dec/2023 15:18:59] "GET /user_details HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [05/Dec/2023 15:18:59] "GET /static/app.css HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [05/Dec/2023 15:18:59] "GET /_debug_toolbar/static/js/jquery.js HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [05/Dec/2023 15:18:59] "GET /_debug_toolbar/static/js/jquery.tablesorter.js HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [05/Dec/2023 15:18:59] "GET /static/user_details.js HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [05/Dec/2023 15:18:59] "GET /_debug_toolbar/static/js/toolbar.js HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [05/Dec/2023 15:18:59] "GET /_debug_toolbar/static/css/toolbar.css?0.23633106798639636 HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [05/Dec/2023 15:18:59] "GET /_debug_toolbar/static/img/djdt_vertical.png HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [05/Dec/2023 15:18:59] "GET /get_user_satellites HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [05/Dec/2023 15:19:12] "POST /add_address HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [05/Dec/2023 15:19:14] "POST /make_address_active HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [05/Dec/2023 15:19:14] "GET /get_viewings HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [05/Dec/2023 15:19:16] "POST /add_satellite HTTP/1.1" 200 -
+INFO:root:refresing TLE data for SL-8 R/B
+INFO:werkzeug:127.0.0.1 - - [05/Dec/2023 15:19:18] "GET /get_viewings HTTP/1.1" 200 -
