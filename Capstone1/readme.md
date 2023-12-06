@@ -11,5 +11,19 @@ run the seed_sats.py file to seed the database with the brightest satellites (as
 
 A NASA api key is required to view the astronomy picture of the day on the homepage (otherwise a default image will dispaly).  To secure a NASA api key go to: https://api.nasa.gov/ and add that API key to your .env file. 
 
+Technology used in the making of this site includes:
+-flask
+-wtforms
+-flask-sqlalchemy
+-bcrypt
+-jQuery
+-ajax
+-pyephem (for calculating satellite transits) 
+
+Api's used:
+-Nasa Astronomy Photograph of the Day (APOD) (requries a free key)
+-https://tle.ivanstanojevic.me/api for refreshing satellite TLE data
+-geocode.maps for geocoding addresss (free - rate limited, throttled)
+
 
 
