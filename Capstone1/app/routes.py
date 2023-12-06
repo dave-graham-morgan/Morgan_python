@@ -40,7 +40,6 @@ def display_signup():
 @auth_blueprint.route("/logout")
 def log_user_out():
    do_logout()
-   flash("You are now logged out.  Come back soon", "success")
    return redirect("/")
 
 @auth_blueprint.route("/login", methods=["GET", "POST"])
@@ -264,14 +263,13 @@ def calculate_viewings():
    satellite_ids = [user_satellite.satellite_id for user_satellite in user_satellites]
    satellites = Satellite.query.filter(Satellite.id.in_(satellite_ids)).all()
 
-   # if not satellites:
-   #    flash("You must have at least one satellite selected", "danger")
-   #    #TODO: THIS FLASH IS COMPLETELY BROKEN
-
    refresh_satellite_data(satellites)
    has_viewings = do_calculate_viewings(active_address, satellites)
    if has_viewings:
-      viewings = Viewing.query.filter(Viewing.user_id == g.user.id, Viewing.address_id == active_address.id).all()
+      viewings = Viewing.query.filter(
+                  Viewing.user_id == g.user.id, 
+                  Viewing.address_id == active_address.id
+                  ).order_by(Viewing.local_rise_time).all()
       dict_viewings = []
       for viewing in viewings:
          duration = viewing.local_set_time - viewing.local_rise_time
