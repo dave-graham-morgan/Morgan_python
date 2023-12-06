@@ -16,7 +16,7 @@ def create_app(config_class=Config):
    app.register_blueprint(homepage_blueprint)
    app.register_blueprint(user_details_blueprint)
    
-   toolbar = DebugToolbarExtension(app)
+   # toolbar = DebugToolbarExtension(app)
    logging.basicConfig(filename='app.log', level=logging.INFO)
    return app
 

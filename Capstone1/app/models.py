@@ -92,6 +92,15 @@ class Address(db.Model):
    lon = db.Column(db.Float, nullable = True)
    active = db.Column(db.Integer, nullable=True)
 
+class APOD(db.Model):
+   """table to store the url to the Astronomy Picture of the Day"""
+   __tablename__="apods"
+
+   id = db.Column(db.Integer, primary_key = True)
+   date = db.Column(db.Date, nullable = False)
+   image_url = db.Column(db.String(2083), nullable = False)
+   image_json = db.Column(db.JSON, nullable = False)
+
 class Viewing(db.Model):
    """table for storing upcoming user viewings"""
    __tablename__ = "viewings"

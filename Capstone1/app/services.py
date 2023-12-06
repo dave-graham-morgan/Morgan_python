@@ -5,7 +5,6 @@ from functools import wraps
 from urllib.parse import quote
 from datetime import datetime, timedelta
 from psycopg2 import IntegrityError
-from datetime import datetime
 from sqlalchemy import and_
 import logging, requests, json, ephem
 
@@ -34,7 +33,7 @@ def do_calculate_viewings(active_address, satellites):
       ephem_satellite = ephem.readtle(satellite.name, satellite.TLE1, satellite.TLE2)
 
       #Want to find a viewable event or try five times
-      counter = 5
+      counter = 50
       while counter > 0:
          #calculate the next pass
          next_pass = observer.next_pass(ephem_satellite)

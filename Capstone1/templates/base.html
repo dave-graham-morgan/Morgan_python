@@ -9,10 +9,32 @@
 </head>
 <body>
    {% if not is_homepage %}
-   {% for category, msg in get_flashed_messages(with_categories=true) %}
-   <p class="text-{{category}}">{{msg}}</p>
-   {% endfor %}
-   {% endif %}
+   <nav class="navbar navbar-expand-sm navbar-light bg-light">
+      <a class="navbar-brand" href="#">Satellite Tracker</a>
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarNav">
+        <div class="d-flex align-items-center justify-content-between w-200">
+          {% for category, msg in get_flashed_messages(with_categories=true) %}
+          <div class="alert alert-{{category}} text-center rounded-pill my-3" role="alert">
+            {{ msg }}
+          </div>
+          {% endfor %}
+        </div>
+      </div>
+      
+      <div class="ml-auto">
+        {% if g.user %}
+        <a class="btn btn-primary btn-sm m-2" href="/logout">Logout</a>
+        {% else %}
+        <a class="btn btn-primary btn-sm m-2" href="/login">Login</a>
+        <a class="btn btn-primary btn-sm m-2" href="/sign_up">Sign Up</a>
+        {% endif %}
+      </div>
+    </nav>
+    {% endif %}
+
    
    {%block content%}
    {%endblock%}

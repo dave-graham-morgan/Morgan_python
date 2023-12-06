@@ -2,9 +2,10 @@ from flask import  render_template, redirect, g, flash, request, jsonify, Bluepr
 from sqlalchemy import and_
 from sqlalchemy.exc import IntegrityError
 from sqlalchemy.orm.exc import NoResultFound, MultipleResultsFound
+from datetime import date
 import logging, os, requests
 
-from .models import db, User, Satellite, User_Satellite, Address, Viewing
+from .models import db, User, Satellite, User_Satellite, Address, Viewing, APOD
 from .forms import SignUpForm, LogInForm, AddressForm
 from .utils import login_required, do_login, do_logout
 from .services import refresh_satellite_data, do_calculate_viewings, geocode
@@ -45,10 +46,15 @@ def log_user_out():
 @auth_blueprint.route("/login", methods=["GET", "POST"])
 def log_user_in():
    next_url = request.args.get('next')
-   form = LogInForm()
+   form = LogInForm()   
+   print(request.method)
+   print("form errors:")
+   print(form.errors)
+   print(f"next_url: {next_url}")
+   print(f"form username: {form.username.data}")
+   print(f"form password: {form.password.data}")
    if form.validate_on_submit():
       user = User.authenticate(form.username.data, form.password.data)
-
       if user:
          do_login(user)
          flash(f"Welcome back {user.username}!", "success")
@@ -64,7 +70,7 @@ def log_user_in():
 
 
 ##############################################################################
-#     homepage / Addresses / satellite details
+#     Addresses / satellite details
 ##############################################################################
 user_details_blueprint = Blueprint('user_details', __name__)
 
@@ -233,8 +239,26 @@ def display_homepage():
 
 @homepage_blueprint.route("/get_apod")
 def get_apod():
-   apod = requests.get(f"https://api.nasa.gov/planetary/apod?api_key={os.environ.get('NASA_API_KEY')}")
-   return Response(apod.text, content_type = 'application/json')
+   """function to get the astronomy picture of the day from NASA and persist its data.
+   this is done to enhance performance as well as keep from being throttled by NASA as this should
+   call just once per day app-wide as opposed to once per homepage load. Keep in mind there is also
+   a default image if we do not get a response from the API"""
+
+   #check if we already have today's photo of the day
+   today = date.today()
+   today_photo = APOD.query.filter_by(date = today).first()
+
+   if today_photo:
+      return Response(today_photo.image_json, content_type ='application/json')
+   else:
+      apod = requests.get(f"https://api.nasa.gov/planetary/apod?api_key={os.environ.get('NASA_API_KEY')}")
+      data = apod.json()
+      new_photo = APOD(date = today, image_url = data.get("url"), image_json = apod.text)
+      db.session.add(new_photo)
+      db.session.commit()
+
+      # new_photo = APOD(date = today, image_url = )
+      return Response(apod.text, content_type = 'application/json')
  
 ##############################################################################
 #     Viewings
