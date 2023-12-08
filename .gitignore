@@ -4,6 +4,7 @@
 **/prob-divide-conquer-solution
 **/warbler-solution
 **/.DS_Store
+.DS_Store
 **/.env
 **/flask-example
 **/app.log

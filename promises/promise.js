@@ -20,4 +20,7 @@ $(document).ready(function(){
       console.log("that was the err")
    })
    
+   axios.get('')
+
+
 })
