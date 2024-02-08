@@ -101,7 +101,7 @@ $(document).ready(function(){
                 })
             },
             error: function(){
-                alert("You must select at least one satellite and have an active address")
+                console.error("there was a problem with one of the viewings")
             }
         })
    })
@@ -167,7 +167,7 @@ function addUserSatelliteToDatabase(satelliteId, callingElement) {
            $(callingElement).addClass('text-bg-secondary')
        },
        error: function(xhr, status, error) {
-           alert(`Error adding satellite ${satelliteId}`);
+           console.error(`there was a problem adding a satellite ${satelliteId}` )
        }
    });
 }

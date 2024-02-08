@@ -37,6 +37,7 @@ def do_calculate_viewings(active_address, satellites):
       while counter > 0:
          #calculate the next pass
          next_pass = observer.next_pass(ephem_satellite)
+         logging.info(f"next_pass is now: {next_pass}")
          if next_pass:
             #extract rise time, rise direction, set time and set direction
             utc_rise_time = ephem.Date(next_pass[0])

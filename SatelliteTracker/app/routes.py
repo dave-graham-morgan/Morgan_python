@@ -277,6 +277,7 @@ def calculate_viewings():
       )).one()
       
    except NoResultFound:
+      logging.error(f"we have no result found in get_viewings route: {active_address}")
       return jsonify({"error": "You must have at least one active address"}, 400)
    except MultipleResultsFound:
       logging.error(f"Data integrity error, multiple active addresses found.")
@@ -289,6 +290,7 @@ def calculate_viewings():
 
    refresh_satellite_data(satellites)
    has_viewings = do_calculate_viewings(active_address, satellites)
+   logging.info(f"has_viewings: {str(has_viewings)}")
    if has_viewings:
       viewings = Viewing.query.filter(
                   Viewing.user_id == g.user.id, 
@@ -311,7 +313,7 @@ def calculate_viewings():
          "address": active_address.street,
          "viewings":dict_viewings
       }   
-      return jsonify(response_data)
+      return jsonify(response_data),200
    
    #no viewings for the active address and selected satellites
    else: 
@@ -319,7 +321,7 @@ def calculate_viewings():
       "address":active_address.street,
       "viewings":"None"
    }
-      return jsonify(response_data)
+      return jsonify(response_data), 200
 
 
 
