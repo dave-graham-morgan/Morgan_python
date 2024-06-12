@@ -1,3 +1,4 @@
+*/.DS_Store
 **/venv/
 **/flask-boggle-solution
 **/misc-python
@@ -9,3 +10,4 @@
 **/flask-example
 **/app.log
 async-nums-cards-solution/
+**/.idea

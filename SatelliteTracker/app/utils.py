@@ -70,7 +70,7 @@ def is_at_night(viewing, observer):
     local_observer.pressure = 0
 
     # horizon of '-18' corresponds to astronomical twilight (fully dark)
-    # it also means any satellite transit of any duration will be dark enough to view in its entirety
+    # it also means it will be dark enough to view any satellite transit of any duration in its entirety
     local_observer.horizon = '-18' 
 
     utc_sunrise = local_observer.previous_rising(ephem.Sun())

@@ -1,25 +1,26 @@
-altgraph @ file:///System/Volumes/Data/SWE/Apps/DT/BuildRoots/BuildRoot7/ActiveBuildRoot/Library/Caches/com.apple.xbs/Sources/python3/python3-133.100.1.1/altgraph-0.17.2-py2.py3-none-any.whl
 appnope==0.1.0
 backcall==0.1.0
 bcrypt==3.1.4
 blinker==1.4
+certifi==2024.6.2
 cffi==1.16.0
+charset-normalizer==3.3.2
 Click==7.0
 decorator==4.3.0
+ephem==4.1.5
 Faker==0.9.1
 Flask==1.0.2
 Flask-Bcrypt==0.7.1
 Flask-DebugToolbar==0.10.1
 Flask-SQLAlchemy==2.3.2
 Flask-WTF==0.14.2
-future @ file:///System/Volumes/Data/SWE/Apps/DT/BuildRoots/BuildRoot7/ActiveBuildRoot/Library/Caches/com.apple.xbs/Sources/python3/python3-133.100.1.1/future-0.18.2-py3-none-any.whl
 greenlet==3.0.1
+idna==3.7
 ipython==7.0.1
 ipython-genutils==0.2.0
 itsdangerous==0.24
 jedi==0.13.1
 Jinja2==2.10
-macholib @ file:///System/Volumes/Data/SWE/Apps/DT/BuildRoots/BuildRoot7/ActiveBuildRoot/Library/Caches/com.apple.xbs/Sources/python3/python3-133.100.1.1/macholib-1.15.2-py2.py3-none-any.whl
 MarkupSafe==1.1.1
 parso==0.3.1
 pexpect==4.6.0
@@ -30,12 +31,15 @@ ptyprocess==0.6.0
 pycparser==2.19
 Pygments==2.2.0
 python-dateutil==2.7.3
+python-dotenv==1.0.1
+requests==2.32.3
 simplegeneric==0.8.1
 six==1.11.0
 SQLAlchemy==1.2.12
 text-unidecode==1.2
 traitlets==4.3.2
 typing_extensions==4.8.0
+urllib3==2.2.1
 wcwidth==0.1.7
 Werkzeug==0.14.1
 WTForms==2.2.1

@@ -14,7 +14,7 @@ class ConfigDev():
    SQLALCHEMY_DATABASE_URI = os.environ.get('SQLALCHEMY_DEV_DATABASE_URI')
    SECRET_KEY = os.environ.get('DEV_SECRET_KEY')
    SQLALCHEMY_TRACK_MODIFICATIONS = False
-   WTF_CSRF_ENABLED = True  #better to leave on to ensure it works
+   WTF_CSRF_ENABLED = True  #better to leave on even in dev to ensure it works
    SQLALCHEMY_ECHO = False  #toggle depending on the need
    DEBUG_TB_INTERCEPT_REDIRECTS = False
 
