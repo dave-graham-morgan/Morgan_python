@@ -9,9 +9,10 @@ db = SQLAlchemy()
 
 def connect_db(app):
    """connect to db"""
-   db.app=app
-   db.init_app(app)
-   db.create_all()
+   with app.app_context():
+      db.app=app
+      db.init_app(app)
+      db.create_all()
  
 class User(db.Model):
    """User model"""

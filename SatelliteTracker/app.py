@@ -10,9 +10,7 @@ from app.routes import auth_blueprint, user_details_blueprint, homepage_blueprin
 def create_app(config_class=Config):
     app = Flask(__name__)
     app.config.from_object(config_class)
-    db.init_app(app)
-    connect_db(app)
-
+   
     app.register_blueprint(auth_blueprint)
     app.register_blueprint(homepage_blueprint)
     app.register_blueprint(user_details_blueprint)
@@ -20,7 +18,6 @@ def create_app(config_class=Config):
     # toolbar = DebugToolbarExtension(app)
     logging.basicConfig(filename='app.log', level=logging.INFO)
     
-
 
     @app.before_request
     def add_user_to_g():
@@ -70,4 +67,5 @@ if __name__ == '__main__':
         app = create_app(Config)
         debug = False
 
+    connect_db(app)
     app.run(port=8080, debug=debug)
